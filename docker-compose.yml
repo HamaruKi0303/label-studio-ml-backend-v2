@@ -1,15 +1,21 @@
 services:
-  nvidia_pytorch2:
+  label_studio_ml:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_ml
     image: nvcr.io/nvidia/pytorch:22.10-py3
-    container_name: web-container
+    # container_name: web-container
     
     environment:
+      # ---------------------------------------------
+      # label-studio-ml param 
+      #
       - LABEL_STUDIO_HOSTNAME=http://192.168.0.100:8080/
-      - config_file=/home/checkpoints/faster_rcnn_r50_fpn_1x_coco.py
-      - checkpoint_file=/home/checkpoints/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth
+      # - config_file=/home/checkpoints/faster_rcnn_r50_fpn_1x_coco.py
+      # - checkpoint_file=/home/checkpoints/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth
+      # - config_file=/home/Pokemon-SV-Detection/mmdetection/configs/yolox/yolox_s_8x8_300e_PokeSVcoco.py
+      - config_file=/home/pokemon-sv-work_dirs/yolox_s_8x8_300e_PokeSVcoco_v2.2.10_0600/yolox_s_8x8_300e_PokeSVcoco.py
+      - checkpoint_file=/home/pokemon-sv-work_dirs/yolox_s_8x8_300e_PokeSVcoco_v2.2.10_0600/epoch_300.pth
       - device=cuda:0
 
     deploy:
@@ -20,15 +26,19 @@ services:
               count: 1
               capabilities: [gpu]
     volumes:
-      - .:/root
+      - .:/home/label_studio_ml/
+      - D:\PROJECT\201_HaMaruki\201_60_PokemonSV\Pokemon-SV-Work_dirs:/home/pokemon-sv-work_dirs
+    working_dir: /home/label_studio_ml
     ports:
-      - "7777:7777"
-    command:
-      /bin/bash -c "cd /root/label-studio-ml-backend/ && \
-      label-studio-ml start coco-detector --with --port=7777 "
-
+      - "5555:5555"
+    # command:
+      # /bin/bash -c "cd /root/label-studio-ml-backend/ && \
+      # label-studio-ml start coco-detector --port=7777 "
+      # /bin/bash -c "python mmdetection/mmdet/utils/collect_env.py"
     #   #   jupyter-lab --ip 0.0.0.0 --allow-root -b localhost --port=6666
     #   #jupyter notebook --port=6666 --ip=0.0.0.0 --allow-root --NotebookApp.token=''
     #   nvidia-smi
+    # python /home/mmdetection/mmdet/utils/collect_env.py
+    # label-studio-ml start coco-detector --port=5555
 
     tty: true
