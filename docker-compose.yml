@@ -31,7 +31,8 @@ services:
     working_dir: /home/label_studio_ml
     ports:
       - "5555:5555"
-    # command:
+    command:
+      label-studio-ml start coco-detector --port=5555
       # /bin/bash -c "cd /root/label-studio-ml-backend/ && \
       # label-studio-ml start coco-detector --port=7777 "
       # /bin/bash -c "python mmdetection/mmdet/utils/collect_env.py"
