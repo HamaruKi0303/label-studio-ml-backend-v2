@@ -1,0 +1,29 @@
+/home
+│   # インストール用のパッケージ
+├── label-studio-ml-backend
+├── mmdetection
+│
+├── label_studio_ml
+│   │
+│   │   # GUI自動化関係
+│   ├── auto
+│   │
+│   │   # COCOフォーマットの推論API
+│   ├── coco-detector
+│   │
+│   │   # label_studio_ml 本体
+│   ├── label_studio_ml
+│
+│
+│   # 学習ログフォルダ
+└── pokemon-sv-work_dirs
+    │
+    │   # 実験フォルダ
+    ├── yolox_s_8x8_300e_PokeSVcoco_v2.2.10_0600
+    │   │
+    │   │   # 学習モデルチェックポイント
+    │   ├── epoch_300.pth
+    │   │   
+    │   │   # Config ファイル
+        └── yolox_s_8x8_300e_PokeSVcoco.py
+
