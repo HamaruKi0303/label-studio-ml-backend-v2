@@ -27,8 +27,8 @@ RUN git clone https://github.com/open-mmlab/mmdetection.git ; exit 0
 RUN cd mmdetection && pip install -v -e .
 
 RUN pip install redis \
-                rq \
-                boto3
+    rq \
+    boto3
 
 # -------------------------------------
 # utils
@@ -51,4 +51,4 @@ RUN cd label-studio-ml-backend && pip install -U -e .
 # utils
 #
 RUN apt-get update && \
-    apt-get install -y libgl1-mesa-dev
+    apt-get install -y libgl1-mesa-dev tree
