@@ -1,0 +1,1 @@
+docker-compose exec label_studio_ml /bin/bash
